@@ -158,8 +158,8 @@ class Queue:
 
     def pop(self):
         """
-          Dequeue the earliest enqueued item still in the queue. This
-          operation removes the item from the queue.
+        Dequeue the earliest enqueued item still in the queue. This
+        operation removes the item from the queue.
         """
         return self.list.pop()
 
@@ -169,10 +169,10 @@ class Queue:
 
 class PriorityQueue:
     """
-      Implements a priority queue data structure. Each inserted item
-      has a priority associated with it and the client is usually interested
-      in quick retrieval of the lowest-priority item in the queue. This
-      data structure allows O(1) access to the lowest-priority item.
+    Implements a priority queue data structure. Each inserted item
+    has a priority associated with it and the client is usually interested
+    in quick retrieval of the lowest-priority item in the queue. This
+    data structure allows O(1) access to the lowest-priority item.
     """
     def  __init__(self):
         self.heap = []
@@ -227,9 +227,9 @@ def manhattanDistance( xy1, xy2 ):
     return abs( xy1[0] - xy2[0] ) + abs( xy1[1] - xy2[1] )
 
 """
-  Data structures and functions useful for various course projects
+    Data structures and functions useful for various course projects
 
-  The search project should not need anything below this line.
+    The search project should not need anything below this line.
 """
 
 class Counter(dict):

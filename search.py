@@ -163,7 +163,41 @@ def nullHeuristic(state, problem=None) -> float:
 
 def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> List[Directions]:
     """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
+    # Priority Queue to hold nodes and their cost
+    priority_queue = PriorityQueue()
+    start_state = problem.getStartState()
+    # Initialize the priority queue with the start state, an empty path, and a cost of 0
+    priority_queue.push((start_state, [], 0), heuristic(start_state, problem))
+    
+    # To keep track of visited nodes and the cost of reaching them
+    marked = dict() 
+    
+    while not priority_queue.isEmpty():
+        # Pop the node with the lowest f value (f = g + h)
+        current_state, path, current_cost = priority_queue.pop()
+        
+        # If the current state is the goal, return the path
+        if problem.isGoalState(current_state):
+            return path
+        
+        # Mark the node as visited only if we have not visited it before or we have a cheaper path to it
+        if current_state not in marked or current_cost < marked[current_state]:
+            marked[current_state] = current_cost
+            
+            # Explore neighbors
+            for successor, action, step_cost in problem.getSuccessors(current_state):
+                # Calculate the new cost to reach the successor
+                new_cost = current_cost + step_cost
+                # Calculate the heuristic value for the successor
+                heuristic_cost = heuristic(successor, problem)
+                # Calculate the total cost (f = g + h)
+                total_cost = new_cost + heuristic_cost
+                
+                # Push the successor to the priority queue with its cost and updated path
+                if successor not in marked or new_cost < marked[successor]:
+                    priority_queue.push((successor, path + [action], new_cost), total_cost)
+    
+    # If no solution is found, raise an error (or return an empty list depending on the requirement)
     util.raiseNotDefined()
 
 # Abbreviations
